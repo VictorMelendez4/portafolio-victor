@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Basic SEO & Open Graph Meta Tags -->
+    <meta name="description" content="Portfolio of Victor Alejandro Melendez, Computer Systems Engineering student specializing in Data Analytics, Python, SQL, and ML pipelines.">
+    <meta name="author" content="Victor Alejandro Melendez">
+    <meta property="og:title" content="Victor Alejandro Melendez | Data Analytics & AI">
+    <meta property="og:description" content="Discover my projects, including the MLB Data Science Prediction System and full-stack web applications.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://victormelendez4.github.io/portafolio-victor/">
+
     <title>Home · Victor Alejandro Melendez</title>
     
     <!-- Fuente Inter para una apariencia limpia y moderna -->
@@ -257,7 +266,7 @@
             .hero-title { font-size: 34px; }
             .hero-section { padding: 60px 24px 40px; }
             .footer-content { flex-direction: column; gap: 16px; text-align: center; }
-            .nav-links { display: none; } /* En móvil sugeriría un menú hamburguesa, por ahora lo ocultamos para mantenerlo simple */
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -300,14 +309,23 @@
         <section id="contact" class="wrap section-wrapper">
             <h2 class="section-title">Get in touch</h2>
             <div class="card">
-                <form action="https://formspree.io/f/mzepdwqp" method="POST" class="form-layout">
+                <!-- Se agregó el script inline en onsubmit para evitar el doble envío y validar espacios en blanco -->
+                <form action="https://formspree.io/f/mzepdwqp" method="POST" class="form-layout" onsubmit="
+                    if(this.querySelector('textarea').value.trim().length === 0) { 
+                        alert('Please enter a valid message.'); 
+                        return false; 
+                    }
+                    this.querySelector('button').disabled = true; 
+                    this.querySelector('button').innerText = 'Sending...';
+                ">
                     <div class="form-group">
                         <label class="form-label">Email:</label>
                         <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Message:</label>
-                        <textarea name="message" class="form-input" rows="5" placeholder="How can we work together?" required style="resize: vertical;"></textarea>
+                        <!-- Se agregó minlength para mayor validación nativa -->
+                        <textarea name="message" class="form-input" rows="5" placeholder="How can we work together?" required minlength="2" style="resize: vertical;"></textarea>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary" style="border: none;">Send Message</button>
